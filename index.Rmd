@@ -1,0 +1,32 @@
+---
+title: "Interactive mapping - crocodile sightings in Queensland, Australia"
+author: "Laura Garner"
+date: "5 May 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+options(digits = 9)
+```
+
+
+```{r data}
+library(leaflet)
+
+df<- read.csv("http://www.ehp.qld.gov.au/data-sets/crocodile-sightings-apr-jun-2016.csv", na.strings = c("no data", "n/a"))
+
+df[115,27] = -16.8116
+croc_lat<- na.omit(as.numeric(as.character(df$latitude)))
+croc_lng<- na.omit(as.numeric(as.character(df$longitude )))
+
+```
+
+```{r map}
+df %>%
+ leaflet() %>%
+ addTiles() %>%
+ addMarkers(lat = croc_lat, lng = croc_lng, clusterOptions = markerClusterOptions())
+```
+
+Crocodile sighting data for the period April to June 2016, taken from open Government data at www.data.qld.gov.au 
