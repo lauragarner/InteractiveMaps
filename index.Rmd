@@ -26,7 +26,7 @@ croc_lng<- na.omit(as.numeric(as.character(df$longitude )))
 df %>%
  leaflet() %>%
  addTiles() %>%
- addMarkers(lat = croc_lat, lng = croc_lng, clusterOptions = markerClusterOptions())
+ addMarkers(lat = croc_lat, lng = croc_lng, clusterOptions = markerClusterOptions(), popup = paste("Size:", df$size.of.largest.crocodile..m...estimate.))
 ```
 
 Crocodile sighting data for the period April to June 2016, taken from open Government data at www.data.qld.gov.au 
